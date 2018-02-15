@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "noEmitOnError": true,
+        "removeComments": false,
+        "sourceMap": true,
+        "target": "es6",
+        "module": "es6",
+        "lib": [
+            "es6"
+        ]
+    },
+    "typeAcquisition": {
+        "enable": true
+    },
+    "exclude": [
+        "node_modules",
+        "wwwroot"
+    ]
+}
