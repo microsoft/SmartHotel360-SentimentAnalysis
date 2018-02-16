@@ -33,6 +33,10 @@ This section will walk through using the Azure Portal and Visual Studio Code to 
 
     ![Selecting the free tier of service](docs/media/02-bing.png)
 
+1. Create a new Storage Account in the same resource group as the Bing Maps API resource. 
+
+    ![Create a Storage Account](docs/media/02-storage.png)
+
 1. Create a new Azure Container Registry resource by clicking the **New** button in the Azure Portal, then searching for `Registry.` Any tier of service would be appropriate. Create the resource in the same resource group as the Bing Maps API for Enterprise resource. 
 
     ![Creating the Azure Container Registry](docs/media/03-acr.png)
@@ -111,7 +115,72 @@ Using the Cosmos DB Data Explorer in the Azure Portal, you can see the JSON docu
 
 ## Local Development Setup
 
+The following prerequisites are needed to use the code in this repository: 
 
+1. Git
+1. [Docker](https://www.docker.com/get-docker)
+1. [Node.js](https://nodejs.org) (Latest LTS)
+1. [Visual Studio Code](http://code.visualstudio.com), with the following Azure-related extensions installed:
+    1. [Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
+    1. [Azure Cosmos DB](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb)
+    1. [Azure Functions](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
+    1. [Azure Storage](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestorage)
+    1. [Docker](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker)
+1. [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+1. [.NET Core SDK](https://www.microsoft.com/net/core) (prerequisite to the Azure Functions CLI)
+1. [Azure Functions CLI](https://github.com/Azure/azure-functions-cli)
+
+The steps below will enable you to debug the Azure Functions locally, then to deploy the code to Azure in a Docker container once you're ready. 
+
+1. Clone this repository, then open the `src` directory as your workspace in Visual Studio Code. 
+
+1. Using Visual Studio Code's built-in terminal window, enter the command `npm install` to install all of the dependencies for the project. 
+
+    ![Terminal window](docs/media/19-terminal.png)
+
+1. Sign in to your Azure subscription by using `F1` (Windows) or `Cmd-Shift-P` (Mac) to open the Visual Studio Code command palette. Type `Azure` and find the `Azure: Sign In` commannd to sign in to your Azure account. 
+
+    ![Sign in](docs/media/20-signin.png)
+
+1. By clicking **Copy and Open**, your browser will open and allow you to paste in the authentication code. Then you can select the Microsoft or organizational account you want to use. 
+
+    ![Copy and open](docs/media/21-copy-and-open.png)
+
+    Once the authentication process completes you'll see the email address you used to sign in down in the bottom-left corner of Visual Studio Code. By clicking your account name you'll be able to select from a drop-down list of your Azure subscriptions. 
+
+1. Now that you're logged into your Azure subscription you will see the resources you created earlier in the various Azure resource explorers in Visual Studio Code. 
+
+    ![Azure explorer windows](docs/media/22-explorers.png)
+
+1. Copy your Bing Maps API key from the Azure Portal and paste it into the `src\web\client\js\webConfig.js` file to the value of the `mapQueryKey` property. 
+
+    ![Bing Maps API Key](docs/media/23-bing-key.png)
+
+1. Open the `src/functions/local.settings.json` file. 
+
+    ![Local settings file](docs/media/25-localsettings.png)
+
+1. Right-click the node for the Cosmos DB database you created earlier and select the **Copy Connection String** option. 
+
+    ![Copy the Cosmos DB connection string](docs/media/24-copy-connection-string.png)
+
+1. Paste the connection string as the value of the `CosmosDb_ConnectionString` property in the `src/functions/local.settings.json` file.
+
+    ![Paste the Cosmos DB connection string](docs/media/26-paste-cosmosdb.png)
+
+1. Copy the Storage Account's connection string using the Azure Storage explorer pane in Visual Studio Code. 
+
+    ![Copy storage connection string](docs/media/27-copy-storage-cs.png)
+
+1. Paste the connection string value into the `AzureWebJobsStorage` property. 
+
+    ![Paste storage connection string](docs/media/28-paste-storage.png)
+
+1. Copy the Cognitive Services API Key from the Azure Portal. Then, paste it into the `COGNITIVE_SERVICES_API_KEY` configuration property value in the `local.settings.json` file. 
+
+    ![Copy API Key](docs/media/29-copy-api-key.png)
+
+1. 
 
 ## Contributing
 
