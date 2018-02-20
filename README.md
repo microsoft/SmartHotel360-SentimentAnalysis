@@ -134,13 +134,11 @@ The following prerequisites are needed to use the code in this repository:
 1. [.NET Core SDK](https://www.microsoft.com/net/core) (prerequisite to the Azure Functions CLI)
 1. [Azure Functions CLI](https://github.com/Azure/azure-functions-cli)
 
-The steps below will enable you to debug the Azure Functions locally, then to deploy the code to Azure in a Docker container once you're ready. 
+The steps below will enable you to debug the Azure Functions locally and deploy it to Azure App Service once it is ready. You will also package up the web app into a Docker container and publish it to App Service on Containers. 
 
-1. Clone this repository, then open the `src` directory as your workspace in Visual Studio Code. 
+### Login to Azure within Visual Studio Code
 
-1. Using Visual Studio Code's built-in terminal window, enter the command `npm install` to install all of the dependencies for the project. 
-
-    ![Terminal window](docs/media/19-terminal.png)
+1. Clone this repository, then open the `src` directory as your workspace in Visual Studio Code.
 
 1. Sign in to your Azure subscription by using `F1` (Windows) or `Cmd-Shift-P` (Mac) to open the Visual Studio Code command palette. Type `Azure` and find the `Azure: Sign In` commannd to sign in to your Azure account. 
 
@@ -154,17 +152,21 @@ The steps below will enable you to debug the Azure Functions locally, then to de
 
 1. Now that you're logged into your Azure subscription you will see the resources you created earlier in the various Azure resource explorers in Visual Studio Code. 
 
-    ![Azure explorer windows](docs/media/22-explorers.png)
+    ![Azure explorer windows](docs/media/22-explorers.png) 
+
+### Configure the Web Site
 
 1. Copy your Bing Maps API key from the Azure Portal and paste it into the `src\web\client\js\webConfig.js` file to the value of the `mapQueryKey` property. 
 
     ![Bing Maps API Key](docs/media/23-bing-key.png)
 
-1. Open the `src/functions/local.settings.json` file. 
+### Configure the Azure Function
+
+1. Open the `src/function/local.settings.json` file. 
 
     ![Local settings file](docs/media/25-localsettings.png)
 
-1. Right-click the node for the Cosmos DB (using SQL API) database you created earlier and select the **Copy Connection String** option. 
+1. Right-click the node for the Cosmos DB (using **SQL** API) database you created earlier and select the **Copy Connection String** option. 
 
     ![Copy the Cosmos DB connection string](docs/media/24-copy-connection-string.png)
 
@@ -184,7 +186,30 @@ The steps below will enable you to debug the Azure Functions locally, then to de
 
     ![Copy API Key](docs/media/29-copy-api-key.png)
 
-1. 
+
+1. Open the `src/functions/AnalyzePendingTweet/dbconfig.js` file. 
+
+    ![Database utilities file](docs/media/30-dbconfig.png)
+
+1. Right-click the node for the Cosmos DB (using **Graph** API) database you created earlier and select the **Open In Portal** option. 
+
+    ![Copy the Graph database connection string](docs/media/31-open-in-portal.png)
+
+1. Copy the Gremlin Endpoint from the Azure Portal. 
+
+    ![Copy Gremlin URL](docs/media/32-copy-gremlin-address.png)
+
+1. Paste this value, but remove the port number and protocol, into the `src/functions/AnalyzePendingTweet/dbconfig.js` file's `config.endpoint` property. 
+
+    ![Gremlin address in config](docs/media/33-endpoint.png)
+
+1. Copy the primary key from the Azure Portal. 
+
+    ![Copy the key](docs/media/34-copy-key.png)
+
+1. Paste the value into the `src/functions/AnalyzePendingTweet/dbconfig.js` file's `config.primaryKey` property. 
+
+    ![Pasted the key](docs/media/35-paste-key.png)
 
 ## Contributing
 
