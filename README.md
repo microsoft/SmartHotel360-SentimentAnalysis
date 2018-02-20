@@ -57,13 +57,17 @@ This section will walk through using the Azure Portal and Visual Studio Code to 
 
     ![Create a Cosmos DB with SQL API](docs/media/07-cosmos-sql.png)
 
+1. Create a new collection in the Cosmos DB database using the Azure Portal's Data Explorer. Name the **Database Id** `TweetsDB` and the **Collection Id** `Tweets`. 
+
+    ![Create a new Cosmos DB Collection](docs/media/08-new-collection.png)
+
 1. Create a second Cosmos DB database, and select the Graph (Gremlin) API. 
 
     ![Create a Cosmos DB with Graph API](docs/media/07-cosmos-graph.png)
 
-1. Create a new collection in the Cosmos DB database using the Azure Portal's Data Explorer. Name the **Database Id** `TweetsDB` and the **Collection Id** `Tweets`. 
+1. Create a new Graph in the new Cosmos DB database id named `TweetsDB` and a graph id of `Tweets`. 
 
-    ![Create a new Cosmos DB Collection](docs/media/08-new-collection.png)
+    ![Create a new Graph](docs/media/36-create-graph.png)
 
 1. Create a new Logic App using the Azure Portal. 
 
