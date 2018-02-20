@@ -1,7 +1,7 @@
 var config = {}
 
-config.endpoint = "sh360dev-sentiment-graph.graphs.azure.com";
-config.primaryKey = "xm2MGNGFYtJrwJM2G9yMds9B2uVeFQiK5bSvqke1LOceTtx7kWTuAmjZypM5LmOEfUlMk0Yzo01oUO6vNESXmQ==";
+config.endpoint = "smarthotel360-graph.gremlin.cosmosdb.azure.com";
+config.primaryKey = "iTjhxLJmafjWIaaT1EK6AEUPLZoiqE7MFa19WgNZw11PtzXcivxH7rSkBZoIhg5iUhP5hNn0EHK9p9OkCpAbnA==";
 config.database = "TweetsDB";
 config.collection = "Tweets";
 

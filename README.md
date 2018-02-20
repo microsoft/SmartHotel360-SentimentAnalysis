@@ -57,6 +57,10 @@ This section will walk through using the Azure Portal and Visual Studio Code to 
 
     ![Create a Cosmos DB with SQL API](docs/media/07-cosmos-sql.png)
 
+1. Create a second Cosmos DB database, and select the Graph (Gremlin) API. 
+
+    ![Create a Cosmos DB with Graph API](docs/media/07-cosmos-graph.png)
+
 1. Create a new collection in the Cosmos DB database using the Azure Portal's Data Explorer. Name the **Database Id** `TweetsDB` and the **Collection Id** `Tweets`. 
 
     ![Create a new Cosmos DB Collection](docs/media/08-new-collection.png)
@@ -160,7 +164,7 @@ The steps below will enable you to debug the Azure Functions locally, then to de
 
     ![Local settings file](docs/media/25-localsettings.png)
 
-1. Right-click the node for the Cosmos DB database you created earlier and select the **Copy Connection String** option. 
+1. Right-click the node for the Cosmos DB (using SQL API) database you created earlier and select the **Copy Connection String** option. 
 
     ![Copy the Cosmos DB connection string](docs/media/24-copy-connection-string.png)
 
