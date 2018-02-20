@@ -1,0 +1,8 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=smarthotel360;AccountKey=jq4J4gcGLTkNPuY33fNuRzrQXIJ7+xQe6ucJwwPOVdZRRE2h+Q6DX2Aw0xN0xsqU7puS5LNUFuJE5WwPFEwK5g==",
+        "CosmosDb_ConnectionString": "AccountEndpoint=https://smarthotel360.documents.azure.com:443/;AccountKey=3HIY1QdfQu3pGEWwIh6xJLUf3CzRd9GnyUlEhJ51CfpWmvXESnw8V2QpvBKmi7HnTX1y8YRy2MG4GDt9rIvi6Q==",
+        "COGNITIVE_SERVICES_API_KEY": "70a9a364235849eb8c923664105e8725"
+    }
+}
