@@ -295,6 +295,50 @@ The Docker tools for Visual Studio Code make it easy to build Docker images when
 
     > Note: The screen shot above also shows the `node:alpine` image, but the version may vary over time. What's important is that you see the `webapp:latest` image in the list. 
 
+1. Navigate to the Azure Container Registry resource you created earlier, and click the **Access keys** menu option. Verify you have enabled the Admin user. 
+
+    ![Access keys](docs/media/47-access-keys.png)
+
+1. Enter the following commands into the Visual Studio Code terminal window, replacing the `{username}`, `{password}`, and `{loginServer}` with values from the Azure Portal. 
+
+    ```
+    docker login -u {username} -p {password} {loginServer}
+    docker tag webapp:latest {loginServer}/webapp
+    docker push {loginServer}/webapp
+    ```
+
+    The terminal window will provide detailed status as the image is pushed to Azure Container Registry. Once it is complete, you can refresh the Docker Explorer to see the image has been published to the ACR resource. 
+
+    ![Pushed Image](docs/media/48-pushed.png)
+
+### Publish the Image to App Service
+
+The final step in the deployment process is to pubish the Docker image from Azure Container Registry to Azure App Service. This can all be done within Visual Studio Code, and the site will be live in a few seconds. 
+
+1. Right-click the `webapp:latest` image in the repository and select the **Deploy Image to Azure App Service** option. 
+
+    ![Deploy the Image](docs/media/49-deploy-image.png)
+
+1. Select the Resource Group where you created the App Service Plan earlier. 
+
+    ![Select group](docs/media/50-select-group.png)
+
+1. Select the App Service Plan you created earlier. 
+    
+    ![Select plan](docs/media/51-select-plan.png)
+
+1. Give the new App Service a name. This will need to be a globally unique name that will be used as the prefix to a URL ending with `azurewebsites.net`.
+
+    ![Name the app](docs/media/52-name-app.png)
+
+1. Visual Studio Code will publish the App Service from the Azure Container Registry image in a few seconds. By `ctrl` or `cmd`-clicking the URL in the output window, you can load the app in your browser. 
+
+    ![App published](docs/media/53-app-published.png)
+
+1. Now the app is running, and you can see the social sentiments in the map. 
+
+    ![App running](docs/media/54-app-running.png)
+
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
