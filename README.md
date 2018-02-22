@@ -1,7 +1,5 @@
 # SmartHotel360
 
-_**Note:** This repo is under construction and within the next few days we will release the code and more details on this Readme. Please stay tuned!_
-
 During our **Connect(); 2017** event this year we presented beautiful app demos using Microsoft developer tools and technologies.
 
 We are happy to announce the release of SmartHotel360. This release intends to share a simplified version of SmartHotel360 reference sample apps used at Connect(); 2017 Keynotes. If you missed it, you can watch <a href="https://channel9.msdn.com/Events/Connect/2017/K100">Scott Guthrie’s Keynote: Journey to the Intelligent Cloud</a> on Channel 9.
