@@ -158,12 +158,6 @@ The steps below will enable you to debug the Azure Functions locally and deploy 
 
     ![Azure explorer windows](docs/media/22-explorers.png) 
 
-### Configure the Web Site
-
-1. Copy your Bing Maps API key from the Azure Portal and paste it into the `src\web\client\js\webConfig.js` file to the value of the `mapQueryKey` property. 
-
-    ![Bing Maps API Key](docs/media/23-bing-key.png)
-
 ### Configure the Azure Function
 
 1. Open the `src/function/local.settings.json` file. 
@@ -190,7 +184,6 @@ The steps below will enable you to debug the Azure Functions locally and deploy 
 
     ![Copy API Key](docs/media/29-copy-api-key.png)
 
-
 1. Open the `src/functions/AnalyzePendingTweet/dbconfig.js` file. 
 
     ![Database utilities file](docs/media/30-dbconfig.png)
@@ -214,6 +207,55 @@ The steps below will enable you to debug the Azure Functions locally and deploy 
 1. Paste the value into the `src/functions/AnalyzePendingTweet/dbconfig.js` file's `config.primaryKey` property. 
 
     ![Pasted the key](docs/media/35-paste-key.png)
+
+## Debug the Azure Function Locally
+
+Once the Azure resources are set up and the local code is configured, the Azure Function can be debugged locally. With the Function running locally on your development machine, you can run the Logic App to collect incoming Tweets containing mentions of the `#SmartHotel360` hashtag. When you execute the Logic App, Tweet data is saved as a JSON document to Cosmos DB. When those documents are saved to the Cosmos DB, a Trigger is fired that results in your local Azure Function executing. Then, the Tweet data is analyzed using Cognitive Services Text Analytics, and the resulting data is then saved into a second Cosmos DB using the Graph API. 
+
+1. Within the `src/function` folder execute the code below to install the Cosmos DB Function extension into your Azure Function project. 
+
+    ```
+    func extensions install --package Microsoft.Azure.WebJobs.Extensions.CosmosDB --version 3.0.0-beta6
+    ```
+
+    > Note: You can learn more about Function Extensions in the [Azure Functions Host Wiki](https://github.com/Azure/azure-functions-host/wiki/Binding-Extensions-Management). 
+
+1. Open Visual Studio Code with the `src/functions` directory set as your workspace. 
+
+1. Hit the **Debug** button in Visual Studio Code or hit the `F5` key to start debugging the Azure Function locally. You should see the Azure Functions CLI emit logging data in the Visual Studio Code terminal window. 
+
+    ![Debugging the Function](docs/media/38-debugging.png)
+
+1. Open two browser tabs to make the debugging experience convenient: 
+
+    * The Logic App designer in the Azure Portal
+    * The Data Explorer tab of the Cosmos DB you created using a SQL API
+
+1. Post a Tweet to your Twitter account using the `#smarthotel360` hash tag. 
+
+1. Click the **Run** button to execute the Logic App.
+
+    ![Run the Logic App](docs/media/37-logic-app-run.png)
+
+1. Once the Logic App executes, the Tweet data is collected and saved to the Cosmos DB database. You can look in the Data Explorer for the Cosmos DB with the SQL API and see the document. 
+
+    ![Document collected](docs/media/39-tweet-document.png)
+
+1. When the document is saved to the Cosmos DB database, the Function attached to it is immediately triggered and the execution is visible in the Visual Studio Code debugger. 
+
+    ![Debugger saving data](docs/media/40-debugger-saving-data.png)
+
+1. By opening the Cosmos DB Graph explorer in Visual Studio Code, you can navigate through the data that was saved to the Graph. 
+
+    ![Graph Explorer](docs/media/41-graph-explorer.png)
+
+### Configure the Web Site
+
+1. Copy your Bing Maps API key from the Azure Portal and paste it into the `src\web\client\js\webConfig.js` file to the value of the `mapQueryKey` property. 
+
+    ![Bing Maps API Key](docs/media/23-bing-key.png)
+
+### Deploy the Web Site to App Service
 
 ## Contributing
 
