@@ -7,6 +7,17 @@ let session = require('express-session');
 let bodyParser = require('body-parser');
 let path = require('path');
 
+// --------------------------------------------------
+// Seed the database. 
+// --------------------------------------------------
+// To see how the site would work with real data, 
+// uncomment the next line and run the web app. 
+// let dbutil = require('./util/dbUtil');
+// --------------------------------------------------
+// Don't forget to uncomment it!
+// --------------------------------------------------
+
+// run the web app
 const app = express();
 app.set('views', path.join(__dirname, 'client/views'));
 app.set('view engine', 'pug');

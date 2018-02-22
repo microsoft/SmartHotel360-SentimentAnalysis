@@ -251,11 +251,49 @@ Once the Azure resources are set up and the local code is configured, the Azure 
 
 ### Configure the Web Site
 
+1. Open Visual Studio Code with the `src\web` directory set as your workspace. 
+
 1. Copy your Bing Maps API key from the Azure Portal and paste it into the `src\web\client\js\webConfig.js` file to the value of the `mapQueryKey` property. 
 
     ![Bing Maps API Key](docs/media/23-bing-key.png)
 
-### Deploy the Web Site to App Service
+1. Copy the Cosmos DB Graph API database's Gremlin Endpoint and Primary Key into the `src\web\util\dbconfig.js` file's `endpoint` and `primarykey` properties. 
+
+    ![Configure the Web Site DB](docs/media/42-configure-website.png)
+
+### Debug the Web Site
+
+The web site with this demo enables the employees of SmartHotel360 to see the social sentiment of hotels in the New York City area. A clickable map shows the hotels as green or red circles that, when clicked, show the general Twitter sentiment analysis of each hotel. 
+
+![The clickable map](docs/media/43-map.png)
+
+1. To populate the Cosmos DB database with sample data, uncomment the call to the `dbUtil` file in `app.js.` 
+
+    ![Generate sample data](docs/media/44-generate.png)
+
+    > Note: Before debugging the app you should comment this out again!
+
+1. Comment the line out again before debugging, then hit `F5` to launch the web site in the Visual Studio Code debugger. Once the debugger launches, the site will be available at [http://localhost:3000](http://localhost:3000). 
+
+When the site launches, click some of the circles to see the sample data, then stop the debugger. 
+
+### Build the Docker Image and Push it to Azure Container Registry
+
+The Docker tools for Visual Studio Code make it easy to build Docker images when `docker-compose` files are in the workspace. 
+
+1. Hit `F1` (Windows) or `Cmd-Shift-P` (Mac) to open the Command Pallete in Visual Studio Code. Then, type the string `docker` to see the Docker commands available. Select the `Docker Compose` command.  
+
+    ![Docker Compose](docs/media/45-docker-compose-up.png)
+
+1. Select the `docker-compose.yml` file. 
+
+    ![Select the file](docs/media/46-select-file.png)
+
+1. Once the image is built you will see the output in the Visual Studio Code terminal. You can also see that the image is now visible in the **Images** node of the Docker Explorer. 
+    
+    ![Docker image built](docs/media/46-image-built.png)
+
+    > Note: The screen shot above also shows the `node:alpine` image, but the version may vary over time. What's important is that you see the `webapp:latest` image in the list. 
 
 ## Contributing
 

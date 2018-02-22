@@ -1,3 +1,0 @@
-
-
-g.V().has('id','PlatinumHotel').as('s').union(select('s'), both().has('sentiment', gt(6)))
