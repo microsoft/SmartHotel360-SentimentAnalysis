@@ -7,7 +7,7 @@ const collectionId = 'Tweets'
 const collectionUrl = `${databaseUrl}/colls/${collectionId}`;
 
 module.exports = {
-    save: function(tweets) {
+    save: function (tweets) {
         console.log('saving to cosmos');
         const promises = tweets.map((tweet) => {
             console.log('inserting into: ' + collectionUrl, tweet);
@@ -19,27 +19,10 @@ module.exports = {
 
         Promise.all(promises);
     },
-    
-    
 
-    analyzeTweetsDummy: function() {
-        
-        return [{
-            _lsn: 280,
-            _rid: "AEtLAPvMoQAJAAAAAAAAAA==",
-            _self: "dbs/AEtLAA==/colls/AEtLAPvMoQA=/docs/AEtLAPvMoQAJAAAAAAAAAA==/",
-            _ts: 1509728450,
-            hashtag: "hotel360",
-            id: "923936730947784700",
-            language: "en",
-            sentiment: 9.2,
-            text: "@chrisdias - No way this demo works lol... #hotel360 Happy! Positive! Love! Excitement!",
-            userAlias: "FluffyDogAttack"
-        }]
-    },
-    saveToGraph: function() {},
+    saveToGraph: function () { },
 
-    analyzeTweets: async function(tweets) {
+    analyzeTweets: function (tweets, callback) {
         const client = new cognitiveServices.textAnalytics({
             apiKey: process.env.COGNITIVE_SERVICES_API_KEY,
             endpoint: 'westus.api.cognitive.microsoft.com' // This should be moved to a variable.
@@ -48,17 +31,19 @@ module.exports = {
         var headers = { 'Content-Type': 'application/json' };
         var body = { documents: tweets };
 
-        return client.sentiment({
+        client.sentiment({
             headers,
             body
         }).then((results) => {
 
-            results.documents.forEach(async function (item) {
+            results.documents.forEach(function (item) {
                 tweets.find(i => i.id == item.id).sentiment = item.score;
             });
 
-            return tweets;
-        }).catch(async err => {
+            if (callback) {
+                callback(tweets);
+            }
+        }).catch(err => {
             console.log(err);
         });
     }

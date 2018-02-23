@@ -5,22 +5,30 @@ var Gremlin = require('gremlin');
 var config = require("./dbconfig");
 var nodeUtil = require('util');
 
-module.exports = async function (context, input) {
+module.exports = function (context, input) {
     const tweets = input;
 
     context.log('Analyzing Tweets...', tweets);
 
     // use Azure Cognitive Services to determine sentiment score
-    const analyzedTweets = await dbUtil.analyzeTweets(tweets);
-
-    // save tweets and sentiments to the Graph
-    saveToGraph(analyzedTweets);
+    const analyzedTweets = dbUtil.analyzeTweets(tweets, (analyzedTweets) => {
+        // save tweets and sentiments to the Graph
+        saveToGraph(analyzedTweets);
+    });
 
     context.log("Tweets analyzed and stored.");
     context.done();
 }
 
-async function saveToGraph(tweets) {
+function isIterable(obj) {
+    // checks for null and undefined
+    if (obj == null) {
+        return false;
+    }
+    return typeof obj[Symbol.iterator] === 'function';
+}
+
+function saveToGraph(tweets) {
     console.log('Start save to Cosmos graph:');
     console.log('Establishing connection to database...');
     var configObject = {
@@ -31,39 +39,45 @@ async function saveToGraph(tweets) {
     };
 
     const client = Gremlin.createClient(443, config.endpoint, configObject);
-    let promisifiedExecute = nodeUtil.promisify(client.execute.bind(client));
     console.log('Connection established');
 
     let queries = [];
     for (let tweet of tweets) { //need to check if these exist
         queries.push(constructAddVertexString('user', tweet.user));
-        queries.push(constructAddVertexString('tweet', tweet.id, {text: tweet.text, sentiment: tweet.sentiment}));
-        for (let hashtag of tweet.hashtags) {
-            queries.push(constructAddVertexString('hashtag', hashtag));
+        queries.push(constructAddVertexString('tweet', tweet.id, { text: tweet.text, sentiment: tweet.sentiment }));
+        if (isIterable(tweet.hashtags)) {
+            for (let hashtag of tweet.hashtags) {
+                queries.push(constructAddVertexString('hashtag', hashtag));
+            }
         }
         queries.push(constructAddEdgeString(
-            'tweeted', 
-            {label: 'user', id: tweet.user},
-            {label: 'tweet', id: tweet.id},
+            'tweeted',
+            { label: 'user', id: tweet.user },
+            { label: 'tweet', id: tweet.id },
         ));
-        for (let hashtag of tweet.hashtags) {
-            queries.push(constructAddEdgeString(
-                'contains',
-                { label: 'tweet', id: tweet.id },
-                { label: 'hashtag', id: hashtag },
-            ));
+
+        if (isIterable(tweet.hashtags)) {
+            for (let hashtag of tweet.hashtags) {
+                queries.push(constructAddEdgeString(
+                    'contains',
+                    { label: 'tweet', id: tweet.id },
+                    { label: 'hashtag', id: hashtag },
+                ));
+            }
         }
     }
 
     for (let query of queries) {
         console.log(query);
-        try {
-            let result = await promisifiedExecute(query, {});
-        } catch(err) { //if we try to add a node that already exists, we'll get a lot of exceptions... TODO to improve
-            if (!err.message.indexOf("Resource with specified id or name already exists")) {
+
+        client.execute(query, (err, result) => {
+            if (err) {
                 console.log(err);
             }
-        }
+            else {
+                console.log(result);
+            }
+        });
     }
     console.log("Done adding data to graph");
 }
@@ -103,12 +117,12 @@ function constructAddEdgeString(label, from, to, props) {
     };
 
     let queryString = `g.V().hasLabel('${escStr(edgeObject.from.label)}').V('${escStr(edgeObject.from.id)}').addE('${escStr(edgeObject.label)}')`;
-    
+
     if (edgeObject.properties) {
         queryString += concatProperties(edgeObject.properties);
     }
     queryString += `.to(g.V().hasLabel('${escStr(edgeObject.to.label)}').V('${escStr(edgeObject.to.id)}'))`;
-    
+
     return queryString;
 }
 
@@ -130,6 +144,5 @@ function concatProperties(properties) {
  */
 function escStr(str) {
     return str.replace("'", "\\'");
-    
-}
 
+}
