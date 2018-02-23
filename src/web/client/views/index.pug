@@ -1,0 +1,24 @@
+extends layout 
+
+block content
+  div.sh-nav_menu
+    img(class="sh-nav_menu-logo " src="/assets/images/logo.svg")
+  div.tweets-container
+    div#map
+    hr
+    section.tweets-content#graphs-section
+      .col
+        canvas#leftChart
+      .col
+        canvas#rightChart
+  script(type='text/javascript', src='../js/chart.min.js')
+  input(type="hidden", id="input-tweets", value=tweets )
+  input(type="hidden", id="input-counts", value=counts )
+  script.
+    var tweets = JSON.parse(document.getElementById("input-tweets").value);
+    var counts = JSON.parse(document.getElementById("input-counts").value);
+  script(type='text/javascript', src='../js/webConfig.js')
+  script(type='text/javascript', src='../js/index.js')
+  script(type='text/javascript', src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap', async, defer)
+  footer.tweets-footer
+

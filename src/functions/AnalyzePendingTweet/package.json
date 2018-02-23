@@ -1,0 +1,16 @@
+{
+  "name": "analyzependingtweet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cognitive-services": "^0.3.4",
+    "documentdb": "^1.13.0",
+    "gremlin": "^2.6.0"
+  }
+}
