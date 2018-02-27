@@ -18,6 +18,7 @@ For this reference app scenario, we built several consumer and line-of-business 
 * [Public Website](https://github.com/Microsoft/SmartHotel360-public-web)
 * [Mobile Apps](https://github.com/Microsoft/SmartHotel360-mobile-desktop-apps)
 * [Sentiment Analysis](https://github.com/Microsoft/SmartHotel360-Sentiment-Analysis-App)
+* [Migrating Internal apps to Azure](https://github.com/Microsoft/SmartHotel360-internal-booking-apps)
 
 ## Azure Setup
 
