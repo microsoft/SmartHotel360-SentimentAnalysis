@@ -2,8 +2,8 @@
   "name": "sentiment-analyzer",
   "description": "Koa-based twitter sentiment analysis",
   "version": "0.0.1",
-  "repository": "https://github.com/bradygaster",
-  "bugs": "https://github.com/bradygaster",
+  "repository": "https://github.com/Microsoft/SmartHotel360-Sentiment-Analysis-App",
+  "bugs": "https://github.com/Microsoft/SmartHotel360-Sentiment-Analysis-App",
   "dependencies": {
     "body-parser": "1.18.2",
     "express": "4.16.2",
