@@ -53,7 +53,7 @@ function saveToGraph(tweets) {
         queries.push(constructAddEdgeString(
             'tweeted',
             { label: 'user', id: tweet.user },
-            { label: 'tweet', id: tweet.id },
+            { label: 'tweet', id: tweet.id }
         ));
 
         if (isIterable(tweet.hashtags)) {
@@ -61,7 +61,7 @@ function saveToGraph(tweets) {
                 queries.push(constructAddEdgeString(
                     'contains',
                     { label: 'tweet', id: tweet.id },
-                    { label: 'hashtag', id: hashtag },
+                    { label: 'hashtag', id: hashtag }
                 ));
             }
         }
