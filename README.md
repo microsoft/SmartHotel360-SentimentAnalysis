@@ -26,7 +26,7 @@ This section will walk through using the Azure Portal and Visual Studio Code to 
 
 We have added an ARM template so you can automate the resources creation, you still need to configure the Cosmos DB and the Logic App specified in the steps 10, 12 and 14.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FSmartHotel360-Sentiment-Analysis-App%2Fmaster%2Fsrc%2Farm%2Fazuredeploy.json" target="_blank">![Deploy yo Azure](/docs/media/57-deploy-to-azure.png)</a>
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FSmartHotel360-Sentiment-Analysis-App%2Fmaster%2Fsrc%2Farm%2Fazuredeploy.json" target="_blank"> <img src="/docs/media/57-deploy-to-azure.png" alt="Deploy to Azure"/></a>
 
 If you prefer to manually create the Azure resources follow this walk though:
 
