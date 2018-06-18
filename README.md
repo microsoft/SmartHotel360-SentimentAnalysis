@@ -27,7 +27,7 @@ This section will walk through using the Azure Portal and Visual Studio Code to 
 We have added an ARM template so you can automate the resources creation, you still need to configure the Cosmos DB and the Logic App specified in the steps 9, 11 and 13.
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FSmartHotel360-Sentiment-Analysis-App%2Fmaster%2Fsrc%2Farm%2Fazuredeploy.json" target="_blank">
-<img src="docs/media/DeployToAzure.png">
+<img src="https://raw.githubusercontent.com/Microsoft/SmartHotel360-Sentiment-Analysis-App/master/docs/media/57-deploy-to-azure.png">
 </a>
 
 If you prefer to manually create the Azure resources follow this walk though:
@@ -58,7 +58,7 @@ If you prefer to manually create the Azure resources follow this walk though:
 
 1. Create a Function App based on JavaScript language, you can select the Linux App Service Plan and the storage that you just created.
 
-    ![Enabling Admin user](docs/media/FunctionCreation.png)
+    ![Creating an Azure Function](docs/media/55-function-creation.png.png)
 
 1. Create a Cognitive Services Text Analytics API resource using the Azure Portal. 
 
@@ -260,6 +260,10 @@ Once the Azure resources are set up and the local code is configured, the Azure 
 
     ![Graph Explorer](docs/media/41-graph-explorer.png)
 
+1. You can deploy the Azure Function with right-click on Function code and selecting Deploy to Azure and selecting your Azure subscription and the Function you created. This will create a zip package and send it to Azure.
+
+    ![Deploying the Azure Function](docs/media/56-function-deployment.png)
+
 ### Configure the Web Site
 
 1. Open Visual Studio Code with the `src\web` directory set as your workspace. 
@@ -271,10 +275,6 @@ Once the Azure resources are set up and the local code is configured, the Azure 
 1. Copy the Cosmos DB Graph API database's Gremlin Endpoint and Primary Key into the `src\web\util\dbconfig.js` file's `endpoint` and `primarykey` properties. 
 
     ![Configure the Web Site DB](docs/media/42-configure-website.png)
-
-1. You can deploy the Azure Function with right-click on Function code and selecting Deploy to Azure and selecting your Azure subscription and the Function you created. This will create a zip package and send it to Azure.
-
-    ![Deploying the Azure Function](docs/media/AzureFunctionDeployment.png)
 
 ### Debug the Web Site
 

@@ -5,7 +5,6 @@
     "location": {
       "type": "string",
       "defaultValue": "westus"
-      //Bing Maps API is only supportted in this region.
     },
     "sku": {
       "type": "string"
