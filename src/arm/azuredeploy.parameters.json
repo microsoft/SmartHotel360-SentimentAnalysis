@@ -14,23 +14,8 @@
     "workerSize": {
       "value": "0"
     },
-    "workerSizeId": {
-      "value": "0"
-    },
-    "numberOfWorkers": {
-      "value": "1"
-    },
     "hostingEnvironment": {
       "value": ""
-    },
-    "storageaccountType": {
-      "value": "Standard_LRS"
-    },
-    "storagekind": {
-      "value": "Storage"
-    },
-    "storagehttpsTrafficOnlyEnabled": {
-      "value": false
     },
     "acrregistrySku": {
       "value": "Standard"

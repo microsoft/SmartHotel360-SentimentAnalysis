@@ -7,31 +7,20 @@
       "defaultValue": "westus"
     },
     "sku": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "Standard"
     },
     "skuCode": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "S1"
     },
     "workerSize": {
-      "type": "string"
-    },
-    "workerSizeId": {
-      "type": "string"
-    },
-    "numberOfWorkers": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "0"
     },
     "hostingEnvironment": {
-      "type": "string"
-    },
-    "storageaccountType": {
-      "type": "string"
-    },
-    "storagekind": {
-      "type": "string"
-    },
-    "storagehttpsTrafficOnlyEnabled": {
-      "type": "bool"
+      "type": "string",
+      "defaultValue": ""
     },
     "acrregistrySku": {
       "defaultValue": "Standard",
@@ -55,31 +44,40 @@
       }
     },
     "BingMapsAPIpublisherId": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "bingmaps"
     },
     "BingMapsAPIofferId": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "mapapis"
     },
     "BingMapsAPIplanId": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "public1"
     },
     "cognitiveapiType": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "TextAnalytics"
     },
     "cognitivesku": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "S0"
     },
     "documentdbdefaultExperience": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "DocumentDB"
     },
     "cosmosgraphdefaultExperience": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "Graph"
     },
     "logicAppApiVersion": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "2016-10-01"
     },
     "logicAppworkflowSchema": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#"
     },
     "logicAppState": {
       "defaultValue": "Enabled",
@@ -110,7 +108,6 @@
     "funcname": "[concat('sh360func', uniqueString(resourceGroup().id))]",
     "funcplanname": "[concat('sh360plan', uniqueString(resourceGroup().id))]",
     "storagename": "[concat('shstr', uniqueString(resourceGroup().id))]",
-    "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storagename'))]",
     "logicappname": "[concat('sh360logicapp', uniqueString(resourceGroup().id))]",
     "acrregistryname": "[concat('sh360acr', uniqueString(resourceGroup().id))]",
     "bingmapsname": "[concat('sh360bingapp', uniqueString(resourceGroup().id))]",
