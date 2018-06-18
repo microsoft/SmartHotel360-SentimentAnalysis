@@ -1,0 +1,291 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "westus"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "skuCode": {
+      "type": "string"
+    },
+    "workerSize": {
+      "type": "string"
+    },
+    "workerSizeId": {
+      "type": "string"
+    },
+    "numberOfWorkers": {
+      "type": "string"
+    },
+    "hostingEnvironment": {
+      "type": "string"
+    },
+    "storageaccountType": {
+      "type": "string"
+    },
+    "storagekind": {
+      "type": "string"
+    },
+    "storagehttpsTrafficOnlyEnabled": {
+      "type": "bool"
+    },
+    "acrregistrySku": {
+      "defaultValue": "Standard",
+      "type": "string",
+      "metadata": {
+        "description": "The SKU of the container registry."
+      }
+    },
+    "acrregistryApiVersion": {
+      "defaultValue": "2017-10-01",
+      "type": "string",
+      "metadata": {
+        "description": "The API version of the container registry."
+      }
+    },
+    "acradminUserEnabled": {
+      "defaultValue": true,
+      "type": "bool",
+      "metadata": {
+        "description": "The value that indicates whether the admin user is enabled."
+      }
+    },
+    "BingMapsAPIpublisherId": {
+      "type": "string"
+    },
+    "BingMapsAPIofferId": {
+      "type": "string"
+    },
+    "BingMapsAPIplanId": {
+      "type": "string"
+    },
+    "cognitiveapiType": {
+      "type": "string"
+    },
+    "cognitivesku": {
+      "type": "string"
+    },
+    "documentdbdefaultExperience": {
+      "type": "string"
+    },
+    "cosmosgraphdefaultExperience": {
+      "type": "string"
+    },
+    "logicAppApiVersion": {
+      "type": "string"
+    },
+    "logicAppworkflowSchema": {
+      "type": "string"
+    },
+    "logicAppState": {
+      "defaultValue": "Enabled",
+      "type": "string"
+    },
+    "logicAppdefinition": {
+      "defaultValue": {
+        "contentVersion": "1.0.0.0",
+        "parameters": {},
+        "actions": {},
+        "triggers": {},
+        "outputs": {},
+        "$schema": "[parameters('logicAppworkflowSchema')]"
+      },
+      "type": "object"
+    },
+    "logicAppparameters": {
+      "defaultValue": {},
+      "type": "object"
+    },
+    "logicApptags": {
+      "defaultValue": {},
+      "type": "object"
+    }
+  },
+  "variables": {
+
+    "funcname": "[concat('sh360func', uniqueString(resourceGroup().id))]",
+    "funcplanname": "[concat('sh360plan', uniqueString(resourceGroup().id))]",
+    "storagename": "[concat('shstr', uniqueString(resourceGroup().id))]",
+    "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storagename'))]",
+    "logicappname": "[concat('sh360logicapp', uniqueString(resourceGroup().id))]",
+    "acrregistryname": "[concat('sh360acr', uniqueString(resourceGroup().id))]",
+    "bingmapsname": "[concat('sh360bingapp', uniqueString(resourceGroup().id))]",
+    "cognitivename": "[concat('sh360cognitive', uniqueString(resourceGroup().id))]",
+    "documentdbname": "[concat('sh360dbsql', uniqueString(resourceGroup().id))]",
+    "cosmosgraphname": "[concat('sh360dbgraph', uniqueString(resourceGroup().id))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/sites",
+      "kind": "functionapp,linux",
+      "name": "[variables('funcname')]",
+      "apiVersion": "2016-03-01",
+      "location": "[parameters('location')]",
+      "properties": {
+        "name": "[variables('funcname')]",
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "AzureWebJobsDashboard",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storagename'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storagename')), '2015-05-01-preview').key1)]"
+            },
+            {
+              "name": "AzureWebJobsStorage",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storagename'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storagename')), '2015-05-01-preview').key1)]"
+            },
+            {
+              "name": "FUNCTIONS_EXTENSION_VERSION",
+              "value": "beta"
+            },
+            {
+              "name": "FUNCTIONS_WORKER_RUNTIME",
+              "value": "nodejs"
+            },
+            {
+              "name": "WEBSITE_NODE_DEFAULT_VERSION",
+              "value": "6.5.0"
+            }
+          ],
+          "linuxFxVersion": "DOCKER|microsoft/azure-functions-node8:2.0",
+          "appCommandLine": ""
+        },
+        "clientAffinityEnabled": false,
+        "hostingEnvironment": "[parameters('hostingEnvironment')]"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverfarms/', variables('funcplanname'))]",
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('storagename'))]"
+      ]
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "sku": {
+        "Tier": "[parameters('sku')]",
+        "Name": "[parameters('skuCode')]"
+      },
+      "kind": "linux",
+      "name": "[variables('funcplanname')]",
+      "apiVersion": "2016-09-01",
+      "location": "[parameters('location')]",
+      "properties": {
+        "name": "[variables('funcplanname')]",
+        "workerSizeId": "[parameters('workerSize')]",
+        "reserved": true,
+        "numberOfWorkers": "1",
+        "hostingEnvironment": "[parameters('hostingEnvironment')]"
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storagename')]",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[parameters('location')]",
+      "properties": {
+        "accountType": "Standard_LRS"
+      }
+    },
+    {
+      "type": "Microsoft.Logic/workflows",
+      "name": "[variables('logicappname')]",
+      "apiVersion": "[parameters('logicAppApiVersion')]",
+      "location": "[parameters('Location')]",
+      "tags": "[parameters('logicApptags')]",
+      "properties": {
+        "definition": "[parameters('logicAppdefinition')]",
+        "parameters": "[parameters('logicAppparameters')]",
+        "state": "[parameters('logicAppState')]"
+      }
+    },
+    {
+      "type": "Microsoft.ContainerRegistry/registries",
+      "sku": {
+        "name": "[parameters('acrregistrySku')]"
+      },
+      "name": "[variables('acrregistryname')]",
+      "apiVersion": "[parameters('acrregistryApiVersion')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "adminUserEnabled": "[parameters('acradminUserEnabled')]"
+      }
+    },
+    {
+      "type": "Microsoft.BingMaps/mapApis",
+      "name": "[variables('bingmapsname')]",
+      "apiVersion": "2016-08-18",
+      "location": "[parameters('location')]",
+      "plan": {
+        "publisher": "[parameters('BingMapsAPIpublisherId')]",
+        "product": "[parameters('BingMapsAPIofferId')]",
+        "name": "[parameters('BingMapsAPIplanId')]"
+      },
+      "tags": {},
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.CognitiveServices/accounts",
+      "sku": {
+        "name": "[parameters('cognitivesku')]"
+      },
+      "kind": "[parameters('cognitiveapiType')]",
+      "name": "[variables('cognitivename')]",
+      "apiVersion": "2016-02-01-preview",
+      "location": "[parameters('location')]",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.DocumentDb/databaseAccounts",
+      "kind": "GlobalDocumentDB",
+      "name": "[variables('documentdbname')]",
+      "apiVersion": "2015-04-08",
+      "location": "[parameters('location')]",
+      "tags": {
+        "defaultExperience": "[parameters('documentdbdefaultExperience')]"
+      },
+      "properties": {
+        "databaseAccountOfferType": "Standard",
+        "locations": [
+          {
+            "id": "[concat(variables('documentdbname'), '-', parameters('location'))]",
+            "failoverPriority": 0,
+            "locationName": "[parameters('location')]"
+          }
+        ],
+        "isVirtualNetworkFilterEnabled": false,
+        "virtualNetworkRules": [],
+        "dependsOn": []
+      }
+    },
+    {
+      "type": "Microsoft.DocumentDb/databaseAccounts",
+      "kind": "GlobalDocumentDB",
+      "name": "[variables('cosmosgraphname')]",
+      "apiVersion": "2015-04-08",
+      "location": "[parameters('location')]",
+      "tags": {
+        "defaultExperience": "[parameters('cosmosgraphdefaultExperience')]"
+      },
+      "properties": {
+        "databaseAccountOfferType": "Standard",
+        "locations": [
+          {
+            "id": "[concat(variables('cosmosgraphname'), '-', parameters('location'))]",
+            "failoverPriority": 0,
+            "locationName": "[parameters('location')]"
+          }
+        ],
+        "capabilities": [
+          {
+            "name": "EnableGremlin"
+          }
+        ],
+        "isVirtualNetworkFilterEnabled": false,
+        "virtualNetworkRules": [],
+        "dependsOn": []
+      }
+    }
+  ]
+}

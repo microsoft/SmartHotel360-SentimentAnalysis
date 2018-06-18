@@ -24,6 +24,14 @@ For this reference app scenario, we built several consumer and line-of-business 
 
 This section will walk through using the Azure Portal and Visual Studio Code to create all of the resources you'd need to deploy the demo to Azure. 
 
+We have added an ARM template so you can automate the resources creation, you still need to configure the Cosmos DB and the Logic App specified in the steps 9, 11 and 13.
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FSmartHotel360-Sentiment-Analysis-App%2Fmaster%2Fsrc%2Farm%2Fazuredeploy.json" target="_blank">
+<img src="https://raw.githubusercontent.com/Microsoft/SmartHotel360-Sentiment-Analysis-App/master/docs/media/57-deploy-to-azure.png">
+</a>
+
+If you prefer to manually create the Azure resources follow this walk though:
+
 1. Create a Bing Maps API for Enterprise resource in the Azure Portal by clicking the **New** button, then searching for `Bing` and selecting the **Bing Maps API for Enterprise** option. 
 
     ![Search for Bing](docs/media/01-bing.png)
@@ -47,6 +55,10 @@ This section will walk through using the Azure Portal and Visual Studio Code to 
 1. Create a new Basic Linux App Service Plan in the same region and resource group as the Azure Container Registry and Bing Maps API for Enterprise resources. 
 
     ![Enabling Admin user](docs/media/05-plan.png)
+
+1. Create a Function App based on JavaScript language, you can select the Linux App Service Plan and the storage that you just created.
+
+    ![Creating an Azure Function](docs/media/55-function-creation.png.png)
 
 1. Create a Cognitive Services Text Analytics API resource using the Azure Portal. 
 
@@ -214,7 +226,7 @@ Once the Azure resources are set up and the local code is configured, the Azure 
 1. Within the `src/function` folder execute the code below to install the Cosmos DB Function extension into your Azure Function project. 
 
     ```
-    func extensions install --package Microsoft.Azure.WebJobs.Extensions.CosmosDB --version 3.0.0-beta6
+    func extensions install --package Microsoft.Azure.WebJobs.Extensions.CosmosDB --version 3.0.0-beta7
     ```
 
     > Note: You can learn more about Function Extensions in the [Azure Functions Host Wiki](https://github.com/Azure/azure-functions-host/wiki/Binding-Extensions-Management). 
@@ -247,6 +259,10 @@ Once the Azure resources are set up and the local code is configured, the Azure 
 1. By opening the Cosmos DB Graph explorer in Visual Studio Code, you can navigate through the data that was saved to the Graph. 
 
     ![Graph Explorer](docs/media/41-graph-explorer.png)
+
+1. You can deploy the Azure Function with right-click on Function code and selecting Deploy to Azure and selecting your Azure subscription and the Function you created. This will create a zip package and send it to Azure.
+
+    ![Deploying the Azure Function](docs/media/56-function-deployment.png)
 
 ### Configure the Web Site
 
