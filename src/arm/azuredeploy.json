@@ -53,7 +53,7 @@
     },
     "BingMapsAPIplanId": {
       "type": "string",
-      "defaultValue": "public2"
+      "defaultValue": "public1"
     },
     "cognitiveapiType": {
       "type": "string",
