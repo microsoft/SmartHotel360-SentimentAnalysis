@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
@@ -42,18 +42,6 @@
       "metadata": {
         "description": "The value that indicates whether the admin user is enabled."
       }
-    },
-    "BingMapsAPIpublisherId": {
-      "type": "string",
-      "defaultValue": "bingmaps"
-    },
-    "BingMapsAPIofferId": {
-      "type": "string",
-      "defaultValue": "mapapis"
-    },
-    "BingMapsAPIplanId": {
-      "type": "string",
-      "defaultValue": "public1"
     },
     "cognitiveapiType": {
       "type": "string",
@@ -208,19 +196,6 @@
       "properties": {
         "adminUserEnabled": "[parameters('acradminUserEnabled')]"
       }
-    },
-    {
-      "type": "Microsoft.BingMaps/mapApis",
-      "name": "[variables('bingmapsname')]",
-      "apiVersion": "2016-08-18",
-      "location": "[parameters('location')]",
-      "plan": {
-        "publisher": "[parameters('BingMapsAPIpublisherId')]",
-        "product": "[parameters('BingMapsAPIofferId')]",
-        "name": "[parameters('BingMapsAPIplanId')]"
-      },
-      "tags": {},
-      "properties": {}
     },
     {
       "type": "Microsoft.CognitiveServices/accounts",
