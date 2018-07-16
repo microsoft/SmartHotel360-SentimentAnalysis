@@ -26,15 +26,6 @@
     "acradminUserEnabled": {
       "value": true
     },
-    "BingMapsAPIpublisherId": {
-      "value": "bingmaps"
-    },
-    "BingMapsAPIofferId": {
-      "value": "mapapis"
-    },
-    "BingMapsAPIplanId": {
-      "value": "public1"
-    },
     "cognitiveapiType": {
       "value": "TextAnalytics"
     },
