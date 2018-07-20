@@ -192,7 +192,7 @@ The steps below will enable you to debug the Azure Functions locally and deploy 
 
 1. Copy the Cognitive Services API Key from the Azure Portal. Then, paste it into the `COGNITIVE_SERVICES_API_KEY` configuration property value in the `local.settings.json` file. 
 
-    ![Copy API Key](docs/media/29-copy-api-key.png)
+    ![Copy API Key](docs/media/cognitive_api_key.png)
 
 1. Open the `src/functions/AnalyzePendingTweet/dbconfig.js` file. 
 
