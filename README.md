@@ -57,7 +57,7 @@ If you prefer to manually create the Azure resources follow this walk though:
 
 1. Create a Function App based on JavaScript language, you can select the Linux App Service Plan and the storage that you just created.
 
-    ![Creating an Azure Function](docs/media/55-function-creation.png.png)
+    ![Creating an Azure Function](docs/media/55-function-creation.png)
 
 1. Create a Cognitive Services Text Analytics API resource using the Azure Portal. 
 
