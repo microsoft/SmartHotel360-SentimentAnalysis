@@ -61,7 +61,7 @@ If you prefer to manually create the Azure resources follow this walk though:
 
 1. Create a Function App based on JavaScript language, you can select the Linux App Service Plan and the storage that you just created.
 
-    ![Creating an Azure Function](docs/media/55-function-creation.png.png)
+    ![Creating an Azure Function](docs/media/55-function-creation.png)
 
 1. Create a Cognitive Services Text Analytics API resource using the Azure Portal. 
 
@@ -196,7 +196,7 @@ The steps below will enable you to debug the Azure Functions locally and deploy 
 
 1. Copy the Cognitive Services API Key from the Azure Portal. Then, paste it into the `COGNITIVE_SERVICES_API_KEY` configuration property value in the `local.settings.json` file. 
 
-    ![Copy API Key](docs/media/29-copy-api-key.png)
+    ![Copy API Key](docs/media/cognitive_api_key.png)
 
 1. Open the `src/functions/AnalyzePendingTweet/dbconfig.js` file. 
 
