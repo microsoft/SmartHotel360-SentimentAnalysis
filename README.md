@@ -35,6 +35,8 @@ Optionally, you can create the Azure resources manually following the [Azure Man
 1. Create a new collection in the Cosmos DB database using the Azure Portal's Data Explorer. Name the **Database Id** `TweetsDB` and the **Collection Id** `Tweets`. 
 
     ![Create a new Cosmos DB Collection](Documents/Images/08-new-collection.png)
+    
+> Note: For partition key you can use /id
 
 1. Create a new Graph in the new Cosmos DB database id named `TweetsDB` and a graph id of `Tweets`. 
 
@@ -183,7 +185,7 @@ Once the Azure resources are set up and the local code is configured, the Azure 
 1. Within the `Source/Function` folder execute the code below to install the Cosmos DB Function extension into your Azure Function project. 
 
     ```
-    func extensions install --package Microsoft.Azure.WebJobs.Extensions.CosmosDB --version 3.0.1 
+    func extensions install --package Microsoft.Azure.WebJobs.Extensions.CosmosDB --version 3.0.3 
     ```
 
     > Note: You can learn more about Function Extensions in the [Azure Functions Host Wiki](https://github.com/Azure/azure-functions-host/wiki/Binding-Extensions-Management). 
