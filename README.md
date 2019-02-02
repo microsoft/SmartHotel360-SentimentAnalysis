@@ -182,7 +182,7 @@ The steps below will enable you to debug the Azure Functions locally and deploy 
 
 Once the Azure resources are set up and the local code is configured, the Azure Function can be debugged locally. With the Function running locally on your development machine, you can run the Logic App to collect incoming Tweets containing mentions of the `#SmartHotel360` hashtag. When you execute the Logic App, Tweet data is saved as a JSON document to Cosmos DB. When those documents are saved to the Cosmos DB, a Trigger is fired that results in your local Azure Function executing. Then, the Tweet data is analyzed using Cognitive Services Text Analytics, and the resulting data is then saved into a second Cosmos DB using the Graph API. 
 
-1. Within the `Source/Function` folder execute the code below to install the Cosmos DB Function extension into your Azure Function project. 
+1. Within the `Source/Function/AnalyzePendingTweet` folder execute the code below to install the Cosmos DB Function extension into your Azure Function project. 
 
     ```
     func extensions install --package Microsoft.Azure.WebJobs.Extensions.CosmosDB --version 3.0.3 
