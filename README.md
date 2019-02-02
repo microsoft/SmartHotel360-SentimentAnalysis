@@ -73,6 +73,8 @@ Optionally, you can create the Azure resources manually following the [Azure Man
         "user": "@{triggerBody()?['TweetedBy']}"
     }
     ```
+    >Note: You need to add the `Tweet Id` as partition key.    
+    
     When you've completed this step the Logic App designer should look like the screen shot below. 
 
     ![Adding the create or update document step](Documents/Images/15-logic-app.png)
