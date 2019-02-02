@@ -26,7 +26,7 @@ This section will walk through using the Azure Portal and Visual Studio Code to 
 
 We have added an ARM template so you can automate the resources creation, you still need to configure the Cosmos DB and the Logic App.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FSmartHotel360-SentimentAnalysis%2Fmaster%2FSource%2FARM%2FSmartHotel360.SentimentAnalysis.Azure.Deploy.json?target=_blank" target='_blank'><img src="Documents/Images/57-deploy-to-azure.png" alt="Deploy to Azure"/></a>
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMicrosoft%2FSmartHotel360-SentimentAnalysis%2Fmaster%2FDeploy%2Fdeployment.json?target=_blank" target='_blank'><img src="Documents/Images/57-deploy-to-azure.png" alt="Deploy to Azure"/></a>
 
  > Note: The deployment of all the resources can take up to 7 minutes. 
 
@@ -73,8 +73,6 @@ Optionally, you can create the Azure resources manually following the [Azure Man
         "user": "@{triggerBody()?['TweetedBy']}"
     }
     ```
-    >Note: You need to add the `Tweet Id` as partition key.    
-    
     When you've completed this step the Logic App designer should look like the screen shot below. 
 
     ![Adding the create or update document step](Documents/Images/15-logic-app.png)
