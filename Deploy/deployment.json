@@ -8,40 +8,18 @@
     }
   },
   "variables": {
-    "function_name": "[concat('function-', uniqueString(resourceGroup().id))]",
-    "website_name": "[concat('smarthotel360sentimentanalysis-', uniqueString(resourceGroup().id))]",
-    "app_service_plan": "[concat('appserviceplan-', uniqueString(resourceGroup().id))]",
+    "function_name": "[concat('function', uniqueString(resourceGroup().id))]",
     "storage_name": "[concat('storage', uniqueString(resourceGroup().id))]",
-    "logic_app_name": "[concat('logicapp-', uniqueString(resourceGroup().id))]",
+    "logic_app_name": "[concat('logicapp', uniqueString(resourceGroup().id))]",
     "container_registry_name": "[concat('smarthotel360acr', uniqueString(resourceGroup().id))]",
-    "bing_maps_api_name": "[concat('bingmap-', uniqueString(resourceGroup().id))]",
-    "text_analytic_api_name": "[concat('textanalytic-', uniqueString(resourceGroup().id))]",
-    "cosmosdb_sql_name": "[concat('sqldb-', uniqueString(resourceGroup().id))]",
-    "cosmosdb_graph_name": "[concat('graphdb-', uniqueString(resourceGroup().id))]",
-    "service_plan_sku": "Standard",
-    "service_plan_sku_code": "S1",
-    "website_linux_version": "NODE|10.1",
+    "bing_maps_api_name": "[concat('bingmap', uniqueString(resourceGroup().id))]",
+    "text_analytic_api_name": "[concat('textanalytic', uniqueString(resourceGroup().id))]",
+    "cosmosdb_sql_name": "[concat('sqldb', uniqueString(resourceGroup().id))]",
+    "cosmosdb_graph_name": "[concat('graphdb', uniqueString(resourceGroup().id))]",
     "logicappschema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
     "logicappdefinition": "[concat('{\"contentVersion\":\"1.0.0.0\",\"parameters\":{},\"actions\":{},\"triggers\":{},\"outputs\":{},\"$schema\":\"', variables('logicappschema'), '\"}')]"
   },
-  "resources": [
-    {
-      "type": "Microsoft.Web/serverfarms",
-      "sku": {
-        "Tier": "[variables('service_plan_sku')]",
-        "Name": "[variables('service_plan_sku_code')]"
-      },
-      "kind": "linux",
-      "name": "[variables('app_service_plan')]",
-      "apiVersion": "2016-03-01",
-      "location": "[parameters('location')]",
-      "properties": {
-        "name": "[variables('app_service_plan')]",
-        "workerSize": 0,
-        "workerSizeId": 0,
-        "numberOfWorkers": 1
-      }
-    },
+  "resources": [ 
     {
       "type": "Microsoft.Web/sites",
       "kind": "functionapp",
@@ -85,19 +63,6 @@
       "location": "[parameters('location')]",
       "properties": {
         "accountType": "Standard_LRS"
-      }
-    },
-    {
-      "type": "Microsoft.Web/sites",
-      "name": "[variables('website_name')]",
-      "apiVersion": "2016-03-01",
-      "location": "[parameters('location')]",
-      "properties": {
-        "name": "[variables('website_name')]",
-        "siteConfig": {
-          "appSettings": [],
-          "linuxFxVersion": "[variables('website_linux_version')]"
-        }
       }
     },
     {
