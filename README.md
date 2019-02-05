@@ -67,15 +67,17 @@ Optionally, you can create the Azure resources manually following the [Azure Man
 
     ```json
     {
+        "_id": "@{triggerBody()?['TweetId']}",
         "created": "@triggerBody()?['CreatedAtIso']",
-        "id": "@triggerBody()?['TweetId']",
+        "id": "@{triggerBody()?['TweetId']}",
         "text": "@triggerBody()?['TweetText']",
         "user": "@{triggerBody()?['TweetedBy']}"
-    }
+    }   
     ```
-    When you've completed this step the Logic App designer should look like the screen shot below. 
-
-    ![Adding the create or update document step](Documents/Images/15-logic-app.png)
+    You also need to specify the **Partition Key Value** parameter
+    ```json
+    "@{triggerBody()?['TweetId']}"  
+    ```
 
 1. Click the **Save** button in the Logic App Designer. Once the Logic App has been saved the view of the *Create or update document* step should change somewhat, demonstrating that the JSON will be constructed using properties from the incoming Tweet. 
 
@@ -192,6 +194,11 @@ Once the Azure resources are set up and the local code is configured, the Azure 
 
 1. Open Visual Studio Code with the `Source/Function` directory set as your workspace. 
 
+>Note: You will need to run the following command in order to restore the NPM packages of the Function:
+```
+    npm i 
+```
+
 1. Hit the **Debug** button in Visual Studio Code or hit the `F5` key to start debugging the Azure Function locally. You should see the Azure Functions CLI emit logging data in the Visual Studio Code terminal window. 
 
     ![Debugging the Function](Documents/Images/38-debugging.png)
@@ -219,7 +226,7 @@ Once the Azure resources are set up and the local code is configured, the Azure 
 
     ![Graph Explorer](Documents/Images/41-graph-explorer.png)
 
-1. You can deploy the Azure Function with right-click on Function code and selecting Deploy to Azure and selecting your Azure subscription and the Function you created. This will create a zip package and send it to Azure.
+1. You can deploy the Azure Function with the Azure extension in Visual Studio Code, click on Deploy to Function App. This will create a zip package and send it to Azure.
 
     ![Deploying the Azure Function](Documents/Images/56-function-deployment.png)
 
@@ -236,7 +243,10 @@ Once the Azure resources are set up and the local code is configured, the Azure 
     ![Configure the Web Site DB](Documents/Images/42-configure-website.png)
 
 ### Debug the Web Site
-
+>Note: You will need to run the following command in order to restore the NPM packages of the website:
+```
+    npm i 
+```
 The web site with this demo enables the employees of SmartHotel360 to see the social sentiment of hotels in the New York City area. A clickable map shows the hotels as green or red circles that, when clicked, show the general Twitter sentiment analysis of each hotel. 
 
 ![The clickable map](Documents/Images/43-map.png)
@@ -293,11 +303,13 @@ The final step in the deployment process is to pubish the Docker image from Azur
 
     ![Deploy the Image](Documents/Images/49-deploy-image.png)
 
-1. Select the Resource Group where you created the App Service Plan earlier. 
+1. Create a new Resource Group where you will host the App Service Plan and Web App. 
 
     ![Select group](Documents/Images/50-select-group.png)
+    
+>Note: We need to create another Resource Group because in the one we used before we already have a (Windows) App Service Consumption Plan running the Azure Function. The new App Service Plan will be based on Linux OS.
 
-1. Select the App Service Plan you created earlier. 
+1. Create an App Service Plan.
     
     ![Select plan](Documents/Images/51-select-plan.png)
 
