@@ -32,13 +32,13 @@ We have added an ARM template so you can automate the resources creation, you st
 
 Optionally, you can create the Azure resources manually following the [Azure Manual Deployment](Documents/AzureManualDeployment.md) guide. 
 
-1. Create a new collection in the Cosmos DB database using the Azure Portal's Data Explorer. Name the **Database Id** `TweetsDB` and the **Collection Id** `Tweets`. 
+1. Create a new collection in the Cosmos DB SQL database using the Azure Portal's Data Explorer. Name the **Database Id** `TweetsDB` and the **Collection Id** `Tweets`. 
 
     ![Create a new Cosmos DB Collection](Documents/Images/08-new-collection.png)
     
 > Note: For partition key you can use /id
 
-1. Create a new Graph in the new Cosmos DB database id named `TweetsDB` and a graph id of `Tweets`. 
+1. Create a new Graph in the new Cosmos DB Graph database id named `TweetsDB` and a graph id of `Tweets`. 
 
     ![Create a new Graph](Documents/Images/36-create-graph.png)
 
