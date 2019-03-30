@@ -12,13 +12,14 @@ For hotel managers, we built a simple Node.js website to analyze customer sentim
 ## Other SmartHotel360 Repos
 For this reference app scenario, we built several consumer and line-of-business apps and an Azure backend. You can find all SmartHotel360 repos in the following locations:
 
-* [SmartHotel360 ](https://github.com/Microsoft/SmartHotel360)
-* [IoT](https://github.com/Microsoft/SmartHotel360-IoT)
-* [Backend](https://github.com/Microsoft/SmartHotel360-Backend)
-* [Website](https://github.com/Microsoft/SmartHotel360-Website)
-* [Mobile](https://github.com/Microsoft/SmartHotel360-Mobile)
-* [Sentiment Analysis](https://github.com/Microsoft/SmartHotel360-SentimentAnalysis)
-* [Registration](https://github.com/Microsoft/SmartHotel360-Registration)
+- [SmartHotel360](https://github.com/Microsoft/SmartHotel360)
+- [IoT](https://github.com/Microsoft/SmartHotel360-IoT)
+- [Mixed Reality](https://github.com/Microsoft/SmartHotel360-MixedReality)
+- [Backend](https://github.com/Microsoft/SmartHotel360-Backend)
+- [Website](https://github.com/Microsoft/SmartHotel360-Website)
+- [Mobile](https://github.com/Microsoft/SmartHotel360-Mobile)
+- [Sentiment Analysis](https://github.com/Microsoft/SmartHotel360-SentimentAnalysis)
+- [Registration](https://github.com/Microsoft/SmartHotel360-Registration)
 
 ## Azure Deployment and Setup
 
