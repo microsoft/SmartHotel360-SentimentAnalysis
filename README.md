@@ -1,3 +1,7 @@
+# **The project SmartHotel360 have been retired, we have archived it. It is no longer maintained. You still can fork the repository.**
+
+## For the latest sample references visit: https://aka.ms/tailwindtraders & https://aka.ms/rpsls 
+
 # SmartHotel360
 
 During our **Connect(); 2017** event this year we presented beautiful app demos using Microsoft developer tools and technologies.
